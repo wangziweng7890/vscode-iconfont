@@ -1,0 +1,113 @@
+{
+  "name": "iconfont-down",
+  "displayName": "ICONFONT-DOWN",
+  "description": "iconfont-auto-download",
+  "version": "0.0.0",
+  "publisher": "wangziweng7890",
+  "author": "wangziweng7890 <wangziweng7890@gmail.com> (https://wangziweng7890.github.io/)",
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liximomo/vscode-sftp.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "iconfont",
+    "autodownload",
+    "remote"
+  ],
+  "activationEvents": [
+    "onCommand:iconfont.config",
+    "workspaceContains:.vscode/iconfont.json"
+  ],
+  "icon": "resources/icon.png",
+  "main": "./dist/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "iconfont.config",
+        "title": "Config",
+        "category": "ICONFONT"
+      },
+      {
+        "command": "iconfont.download",
+        "title": "Download",
+        "category": "ICONFONT"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": ".vscode/sftp.json",
+        "url": "./schema/config.schema.json"
+      }
+    ],
+    "resourceLabelFormatters": [
+      {
+        "scheme": "remote",
+        "formatting": {
+          "label": "${path}",
+          "separator": "/"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "test": "jest",
+    "package": "vsce package",
+    "pub:debug": "rm -rf _debug && mkdir _debug && vsce package --out _debug/sftp-debug.vsix && cd _debug && git init && git commit --allow-empty -m 'update debug package' && git checkout -b debug-pacakge && cp ../INSTALL_DEBUG.md README.md  && git add . && git commit -am 'update debug package' && git push git@github.com:liximomo/vscode-sftp.git debug-pacakge --force"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.4",
+    "@types/jest": "^23.3.5",
+    "@types/lru-cache": "^4.1.1",
+    "@types/node": "^8.10.25",
+    "@types/vscode": "1.30",
+    "@types/webpack-env": "^1.13.6",
+    "axios": "^0.21.1",
+    "compressing": "^1.5.1",
+    "jest": "^20.0.4",
+    "memfs": "^2.15.5",
+    "rimraf": "^2.6.2",
+    "ts-loader": "^5.3.0",
+    "tslint": "^5.11.0",
+    "typescript": "3.1.6",
+    "typescript-tslint-plugin": "^0.0.6",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "async": "^2.6.0",
+    "fs-extra": "^5.0.0",
+    "ftp": "^0.3.10",
+    "ignore": "^5.0.2",
+    "joi": "^10.6.0",
+    "lodash.debounce": "^4.0.8",
+    "lru-cache": "^4.1.3",
+    "p-queue": "2.4.2",
+    "ssh-config": "^1.1.3",
+    "ssh2": "^0.8.5",
+    "tmp": "^0.0.33",
+    "upath": "^1.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "<rootDir>/test/preprocessor.js"
+    },
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.js",
+      "<rootDir>/**/*/__tests__/*.ts"
+    ]
+  }
+}

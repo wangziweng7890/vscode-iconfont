@@ -1,0 +1,12 @@
+.DS_Store
+out
+dist
+node_modules
+*.log
+test/test.js
+_debug
+.vscode/**
+!.vscode/tasks.json
+!.vscode/launch.json
+/TODO.md
+/INSTALL_DEBUG.md
